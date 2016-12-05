@@ -12,7 +12,7 @@ var connection = mysql.createConnection(db.config);
  */
 
 exports.getAll = function(callback) {
-    var query = 'SELECT * FROM school_view;';
+    var query = 'SELECT * FROM School_View;';
 
     connection.query(query, function(err, result) {
         callback(err, result);
@@ -20,7 +20,7 @@ exports.getAll = function(callback) {
 };
 
 exports.getById = function(school_id, callback) {
-    var query = 'SELECT * FROM school_view WHERE school_id = ?';
+    var query = 'SELECT * FROM School_View WHERE school_id = ?';
     var queryData = [school_id];
 
     connection.query(query, queryData, function(err, result) {
@@ -29,7 +29,7 @@ exports.getById = function(school_id, callback) {
 };
 
 exports.insert = function(params, callback) {
-    var query = 'INSERT INTO school (school_name, address_id) VALUES (?, ?)';
+    var query = 'INSERT INTO School (school_name, address_id) VALUES (?, ?)';
 
     // the question marks in the sql query above will be replaced by the values of the
     // the data in queryData
@@ -42,7 +42,7 @@ exports.insert = function(params, callback) {
 };
 
 exports.delete = function(school_id, callback) {
-    var query = 'DELETE FROM school WHERE school_id = ?';
+    var query = 'DELETE FROM School WHERE school_id = ?';
     var queryData = [school_id];
 
     connection.query(query, queryData, function(err, result) {
@@ -52,7 +52,7 @@ exports.delete = function(school_id, callback) {
 };
 
 exports.update = function(params, callback) {
-    var query = 'UPDATE school SET school_name = ?, address_id = ? WHERE school_id = ?';
+    var query = 'UPDATE School SET school_name = ?, address_id = ? WHERE school_id = ?';
     var queryData = [params.school_name, params.address_id, params.school_id];
 
     connection.query(query, queryData, function(err, result) {
@@ -61,25 +61,25 @@ exports.update = function(params, callback) {
 };
 
 /*  Stored procedure used in this example
-     DROP PROCEDURE IF EXISTS school_getinfo;
+     DROP PROCEDURE IF EXISTS School_GetInfo;
 
      DELIMITER //
-     CREATE PROCEDURE school_getinfo (school_id int)
+     CREATE PROCEDURE School_GetInfo (school_id int)
      BEGIN
-     SELECT * FROM school WHERE school_id = school_id;
-     SELECT a.*, school_id FROM address a
-     LEFT JOIN school s on s.address_id = a.address_id;
+     SELECT * FROM School WHERE school_id = school_id;
+     SELECT a.*, school_id FROM Address a
+     LEFT JOIN School s on s.address_id = a.address_id;
 
      END //
      DELIMITER ;
 
      # Call the Stored Procedure
-     CALL school_getinfo (4);
+     CALL School_GetInfo (4);
 
  */
 
 exports.edit = function(school_id, callback) {
-    var query = 'CALL school_getinfo(?)';
+    var query = 'CALL School_GetInfo(?)';
     var queryData = [school_id];
 
     connection.query(query, queryData, function(err, result) {

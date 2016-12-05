@@ -1,8 +1,5 @@
-<html>
-    <head>
-        <title>Schools</title>
-    </head>
-    <body>
+<%- include("../includes/header.ejs", {title:"School - View All"}); %>
+
         <h1>Schools</h1>
         <a href="/school/add">Add New School</a> <br />
 
@@ -13,7 +10,7 @@
             <% for(var i=0; result.length > i; i++ ) { %>
             <tr>
                 <td><a href="/school/?school_id=<%= result[i].school_id %>"><%= result[i].school_name %></a></td>
-                <td><%= result[i].street %>, <%= result[i].zipcode %></td>
+                <td><%= result[i].street %>, <%= result[i].zip_code %></td>
                 <td>
                     <button onclick="event.preventDefault();window.location.href='/school/edit2/?school_id=<%= result[i].school_id %>'">Edit</button>
                     <form action="/school/delete/" style="display:inline;">
@@ -25,6 +22,5 @@
             </tr>
             <% } %>
         </table>
-    </body>
 
-</html>
+<%- include("../includes/footer.ejs"); %>
