@@ -6,7 +6,7 @@ var connection = mysql.createConnection(db.config);
 
 /*
  create or replace view company_view as
- select s.*, a.street, a.zipcode from company s
+ select s.*, a.street, a.zip_code from company s
  join address a on a.address_id = s.address_id;
 
  */
@@ -20,7 +20,7 @@ exports.getAll = function(callback) {
 };
 
 exports.getById = function(company_id, callback) {
-    var query = 'SELECT c.*, a.street, a.zipcode FROM Company c ' +
+    var query = 'SELECT c.*, a.street, a.zip_code FROM Company c ' +
         'LEFT JOIN Company_Address ca on ca.company_id = c.company_id ' +
         'LEFT JOIN Address a on a.address_id = ca.address_id ' +
         'WHERE c.company_id = ?';
@@ -145,7 +145,7 @@ exports.update = function(params, callback) {
  */
 
 exports.edit = function(company_id, callback) {
-    var query = 'CALL company_getinfo(?)';
+    var query = 'CALL Company_GetInfo(?)';
     var queryData = [company_id];
 
     connection.query(query, queryData, function(err, result) {
