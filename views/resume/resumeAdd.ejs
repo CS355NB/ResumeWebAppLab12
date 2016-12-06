@@ -1,8 +1,5 @@
-<html>
-    <head>
-        <title>Add New Resume</title>
-    </head>
-    <body>
+<%- include("../includes/header.ejs", {title:"Add New Resume"}); %>
+
         <h1>Add New Resume</h1>
         <form action="/resume/insert" method="get">
             Resume Name: <input id="resume_name" name="resume_name" type="text" />
@@ -14,10 +11,23 @@
                 <option value="<%= account[i].account_id %>"><%= account[i].last_name + ', ' + account[i].first_name %></option>
                 <% } %>
             </select>
+            Company
+            <br />
+            <select id="company_id" name="company_id" multiple="multiple">
+                <% for(var i=0; company.length > i; i++ ) { %>
+                <option value="<%= company[i].company_id %>"><%= company[i].company_name %></option>
+                <% } %>
+            </select>
 
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#company_id').multiselect();
+                });
+            </script>
+
+            <br />
             <input type="submit" />
 
         </form>
-    </body>
 
-</html>
+<%- include("../includes/footer.ejs"); %>

@@ -124,23 +124,23 @@ exports.update = function(params, callback) {
 };
 
 /*  Stored procedure used in this example
-     DROP PROCEDURE IF EXISTS company_getinfo;
+     DROP PROCEDURE IF EXISTS Company_GetInfo;
 
      DELIMITER //
-     CREATE PROCEDURE company_getinfo (_company_id int)
+     CREATE PROCEDURE Company_GetInfo (_company_id int)
      BEGIN
 
-     SELECT * FROM company WHERE company_id = _company_id;
+     SELECT * FROM Company WHERE company_id = _company_id;
 
-     SELECT a.*, s.company_id FROM address a
-     LEFT JOIN company_address s on s.address_id = a.address_id AND company_id = _company_id
-     ORDER BY a.street, a.zipcode;
+     SELECT a.*, s.company_id FROM Address a
+     LEFT JOIN Company_Address s on s.address_id = a.address_id AND company_id = _company_id
+     ORDER BY a.street, a.zip_code;
 
      END //
      DELIMITER ;
 
      # Call the Stored Procedure
-     CALL company_getinfo (4);
+     CALL Company_GetInfo (4);
 
  */
 
