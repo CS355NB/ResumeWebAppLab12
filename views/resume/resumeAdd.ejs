@@ -11,7 +11,9 @@
                 <option value="<%= account[i].account_id %>"><%= account[i].last_name + ', ' + account[i].first_name %></option>
                 <% } %>
             </select>
-            Company
+            <br />
+            <br/>
+            Company(-ies)
             <br />
             <select id="company_id" name="company_id" multiple="multiple">
                 <% for(var i=0; company.length > i; i++ ) { %>
@@ -24,8 +26,39 @@
                     $('#company_id').multiselect();
                 });
             </script>
-
             <br />
+            <br />
+            School(s)
+            <br />
+            <select id="school_id" name="school_id" multiple="multiple">
+                <% for(var i=0; school.length > i; i++ ) { %>
+                <option value="<%= school[i].school_id %>"><%= school[i].school_name %></option>
+                <% } %>
+            </select>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#school_id').multiselect();
+                });
+            </script>
+            <br />
+            <br />
+            Skill(s)
+            <br />
+            <select id="skill_id" name="skill_id" multiple="multiple">
+                <% for(var i=0; skill.length > i; i++ ) { %>
+                <option value="<%= skill[i].skill_id %>"><%= skill[i].skill_name %></option>
+                <% } %>
+            </select>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#skill_id').multiselect();
+                });
+            </script>
+            <br />
+            <br />
+
             <input type="submit" />
 
         </form>

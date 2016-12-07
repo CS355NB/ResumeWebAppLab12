@@ -24,7 +24,7 @@ exports.getById = function(resume_id, callback) {
 */
 
 exports.getById = function(resume_id, callback) {
-    /*var query = 'SELECT r.*, ac.first_name, ac.last_name, ac.email, sc.school_name, ad.street, ad.zip_code, co.company_name, sk.skill_name, sk.skill_description FROM Account ac ' +
+    var query = 'SELECT r.*, ac.first_name, ac.last_name, ac.email, sc.school_name, ad.street, ad.zip_code, co.company_name, sk.skill_name, sk.skill_description FROM Account ac ' +
             'LEFT JOIN Resume r ON r.account_id = ac.account_id ' +
             'LEFT JOIN Resume_Company rc ON rc.resume_id = r.resume_id ' +
             'LEFT JOIN Company co ON co.company_id = rc.company_id ' +
@@ -34,11 +34,12 @@ exports.getById = function(resume_id, callback) {
             'LEFT JOIN Resume_School rs ON rs.school_id = sc.school_id' +
             'LEFT JOIN Resume_Skill rsk ON rsk.resume_id = rs.resume_id ' +
             'LEFT JOIN Skill sk ON sk.skill_id = rsk.skill_id ' +
-            'WHERE r.resume_id = ?';*/
-    var query = 'SELECT r.*, c.company_name FROM Resume r ' +
-            'LEFT JOIN Resume_Company rc ON rc.resume_id = r.resume_id ' +
-            'LEFT JOIN Company c ON c.company_id = rc.company_id' +
             'WHERE r.resume_id = ?';
+    /*var query = 'SELECT r.*, a.*, c.company_name FROM Account a ' +
+            'JOIN Resume r ON r.account_id = a.account_id ' +
+            'LEFT JOIN Resume_Company rc ON rc.resume_id = r.resume_id ' +
+            'LEFT JOIN Company c ON c.company_id = rc.company_id ' +
+            'WHERE r.resume_id = ?';*/
     var queryData = [resume_id];
     console.log(query);
 
@@ -109,7 +110,7 @@ var resumeCompanyInsert = function(resume_id, companyIDArray, callback) {
 module.exports.resumeCompanyInsert = resumeCompanyInsert;
 
 var resumeCompanyDeleteAll = function(resume_id, callback) {
-    var query = 'DELETE FROM Resume_Address WHERE resume_id = ?';
+    var query = 'DELETE FROM Resume_Company WHERE resume_id = ?';
     var queryData = [resume_id];
 
     connection.query(query, queryData, function(err, result) {
@@ -134,6 +135,9 @@ exports.update = function(params, callback) {
             }
         });
     });
+    /*connection.query(query, queryData, function(err, result) {
+        resu
+    }*/
 };
 
 /*  Stored procedure used in this example

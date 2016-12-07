@@ -3,6 +3,8 @@ var router = express.Router();
 var resume_dal = require('../model/resume_dal');
 var account_dal = require('../model/account_dal');
 var company_dal = require('../model/company_dal');
+var school_dal = require('../model/school_dal');
+var skill_dal = require('../model/skill_dal');
 
 
 // View All resume
@@ -38,13 +40,19 @@ router.get('/', function(req, res){
 // Return the add a new resume form
 router.get('/add', function(req, res){
     // passing all the query parameters (req.query) to the insert function instead of each individually
-    account_dal.getAll(function(err,result) {
-        if (err) {
-            res.send(err);
-        }
-        else {
-            res.render('resume/resumeAdd', {'account': result});
-        }
+    account_dal.getAll(function (err, result) {
+        company_dal.getAll(function (err, company) {
+            school_dal.getAll(function(err, school) {
+                skill_dal.getAll(function (err, skill) {
+                    if (err) {
+                        res.send(err);
+                    }
+                    else {
+                        res.render('resume/resumeAdd', {'account': account, 'company': company, 'school': school, 'skill': skill});
+                    }
+                });
+            });
+        });
     });
 });
 
@@ -64,7 +72,7 @@ router.get('/insert', function(req, res){
         // passing all the query parameters (req.query) to the insert function instead of each individually
         resume_dal.insert(req.query, function(err,result) {
             if (err) {
-                console.log(err) //Naz - added from lab 12 company_routes example
+                //console.log(err) //Naz - added from lab 12 company_routes example
                 res.send(err);
             }
             else {
@@ -94,7 +102,11 @@ router.get('/edit2', function(req, res) {
     else {
         resume_dal.getById(req.query.resume_id, function(err, resume) {
             company_dal.getAll(function(err, company) {
-                res.render('resume/resumeUpdate', {resume: resume[0], company: company});
+                school_dal.getAll(function(err, school) {
+                    skill_dal.getAll(function (err, skill) {
+                        res.render('resume/resumeUpdate', {resume: resume[0], company: company, school: school, skill: skill});
+                    });
+                });
             });
         });
     }

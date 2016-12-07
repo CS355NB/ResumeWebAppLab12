@@ -114,7 +114,8 @@ exports.update = function(params, callback) {
                 //insert company_address ids
                 companyAddressInsert(params.company_id, params.address_id, function(err, result){
                     callback(err, result);
-                });}
+                });
+            }
             else {
                 callback(err, result);
             }

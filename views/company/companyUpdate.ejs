@@ -1,9 +1,4 @@
-<!-- <%- include("../includes/header.ejs", {title: "Update " + company.company_name}); %> -->
-<html>
-<head>
-    <title>Update <%= company.company_name%></title>
-</head>
-<body>
+<%- include("../includes/header.ejs", {title: "Update " + company.company_name}); %>
 
 <h1>Update <%= company.company_name%></h1>
 <form action="/company/update" method="get">
@@ -32,11 +27,10 @@
     </script>
 
     <br />
+    <br />
 
     <input type="submit" />
 
 </form>
 
-</body>
-</html>
-<!-- <%- include("../includes/footer.ejs"); %> -->
+<%- include("../includes/footer.ejs"); %>
